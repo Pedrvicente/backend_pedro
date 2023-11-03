@@ -1,6 +1,7 @@
 <?php 
 
-include('includes/connect.php');
+include('../includes/db.php');
+include('../functions/common_function.php');
 
 ?>
 
@@ -27,10 +28,10 @@ include('includes/connect.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Products</a>
+          <a class="nav-link" href="products.php">Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Register</a>
@@ -39,12 +40,12 @@ include('includes/connect.php');
           <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+          <a class="nav-link" href="cart.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
   <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-</svg><sup>1</sup></a>
+</svg><sup><?php cart_number(); ?></sup></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Total Price:</a>
+          <a class="nav-link" href="#">Preço Total: <?php total_price()?></a>
         </li>
     </div>
   </div>
@@ -73,34 +74,12 @@ include('includes/connect.php');
       <div class="col-md-10">
         <div class="row">
 
+
         <?php
 
-          $select_query = "SELECT * FROM `products`";
-          $fetch_products = mysqli_query($connect, $select_query);
 
-          while( $row = mysqli_fetch_assoc($fetch_products)){
-            $product_id = $row['product_id'];
-            $product_title = $row['product_title'];
-            $description = $row['product_description'];
-            $product_id = $row['product_id'];
-            $category_id = $row['category_id'];
-            $product_image = $row['product_image'];
-            $product_price = $row['product_price'];
-            echo "
-            <div class='col-md-4 mb-2'>
-            <div class='card' style='width: 18rem;'>
-              <img src='./images/rouxos.jpg' class='card-img-top' alt='...'>
-              <div class='card-body'>
-                <h5 class='card-title'>$product_title</h5>
-                <p class='card-text'>$description</p>
-                <a href='#' class='btn btn-primary'>Add to Cart</a>
-                <a href='#' class='btn btn-secondary' >View More</a>
-              </div>
-            </div>
-          </div>
-            ";
-          }
-
+        product_details();
+        categories();
         ?>
 
           
