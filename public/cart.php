@@ -72,6 +72,7 @@ include('../functions/common_function.php');
 
    <div class="container">
     <div class="row">
+      <form action="" method="post">
         <table class="table">
             <thead>
                 <tr>
@@ -106,12 +107,21 @@ include('../functions/common_function.php');
             <tbody>
                 <tr>
                     <td><?php echo $product_title?></td>
-                    <td><img src="../images/<?php $product_image ?></td>
-                    <td><input type="text"></td>
+                    <td><img src="../images/<?php $product_image ?>"></td>
+                    <td><input type="text" name="quantity"></td>
+                    <?php 
+                      $fetch_ip = getIPAddress(); 
+                      if(isset($_POST['update'])){
+                        $quantity = $_POST['quantity'];
+                        $update_cart = "UPDATE `cart_details` SET quantity=$quantity WHERE ip_adress='$fetch_ip'";
+                        $result_cart = mysqli_query($connect, $update_cart);
+                        $total_price = $total_price*$quantity;
+                      }
+                    ?>
                     <td><?php echo $price_table?></td>
                     <td><input type="checkbox" name="" id=""></td>
                     <td>
-                        <button>Remover</button>
+                        <input type="submit" value="Atualizar Carrinho" name="update">
                         <button>Atualizar</button>
                     </td>
 
@@ -130,7 +140,7 @@ include('../functions/common_function.php');
         </div>
     </div>
    </div>
-
+   </form>
     
 
 
