@@ -74,16 +74,7 @@ include('../functions/common_function.php');
     <div class="row">
       <form action="" method="post">
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Titulo do Produto</th>
-                    <th>Imagem</th>
-                    <th>Quantidade</th>
-                    <th>Preço</th>
-                    <th>Remover</th>
-                    <th>Operações</th>
-                </tr>
-            </thead>
+            
             <?php 
 
                 global $connect;
@@ -91,6 +82,20 @@ include('../functions/common_function.php');
                 $total_price = 0;
                 $cart_query = "SELECT * FROM `cart_details` WHERE ip_adress='$fetch_ip'";
                 $result_query = mysqli_query($connect, $cart_query);
+                $result_count = mysqli_num_rows($result_query);
+                if($result_count > 0){
+                  echo "<thead>
+                  <tr>
+                      <th>Titulo do Produto</th>
+                      <th>Imagem</th>
+                      <th>Quantidade</th>
+                      <th>Preço</th>
+                      <th>Remover</th>
+                      <th>Operações</th>
+                  </tr>
+              </thead>
+                  ";
+
                 while($row= mysqli_fetch_array($result_query)){
                   $product_id = $row['product_id'];
                   $fetch_products = "SELECT * FROM `products` WHERE product_id='$product_id'";
@@ -119,10 +124,10 @@ include('../functions/common_function.php');
                       }
                     ?>
                     <td><?php echo $price_table?></td>
-                    <td><input type="checkbox" name="" id=""></td>
+                    <td><input type="checkbox" name="remove_item[]" value="<?php  echo $product_id ?>"></td>
                     <td>
                         <input type="submit" value="Atualizar Carrinho" name="update">
-                        <button>Atualizar</button>
+                        <input type="submit" value="Remover" name="remove">
                     </td>
 
                 </tr>
@@ -130,17 +135,58 @@ include('../functions/common_function.php');
                      }
                   
                     }
+                  }else{
+                    echo "<h2>Carrinho vazio</h2>";
+                  }
                 ?>
             </tbody>
         </table>
         <div class="d-flex">
-            <h4 class="px-3">Preço Total: <?php echo $total_price?></h4>
-            <a href="index.php"><button>Continuar a Comprar</button></a>
-            <a href="index.php"><button>Checkout</button></a>
+          <?php 
+          global $connect;
+          $fetch_ip = getIPAddress(); 
+          $cart_query = "SELECT * FROM `cart_details` WHERE ip_adress='$fetch_ip'";
+          $result_query = mysqli_query($connect, $cart_query);
+          $result_count = mysqli_num_rows($result_query);
+          if($result_count > 0){
+            echo "<h4 class='px-3'>Preço Total: $total_price</h4>
+            <input type='submit' value='Continuar a Comprar' name='continue_shopping'>
+            <a href=''><button>Checkout</button></a>
+            ";
+          }else{
+            echo "<input type='submit' value='Continuar a Comprar' name='continue_shopping'>";
+          }
+          if(isset($_POST['continue_shopping'])){
+            echo "<script>window.open('index.php','_self')</script>";
+          }
+          ?>
+            
         </div>
     </div>
    </div>
    </form>
+
+   <?php
+
+    function remove_cart(){
+
+      global $connect;
+      if(isset($_POST['remove'])){
+        foreach($_POST['remove_item'] as $remove_id) {
+          echo $remove_id;
+          $delete_item = "DELETE FROM `cart_details` WHERE product_id=$remove_id";
+          $delete = mysqli_query($connect, $delete_item);
+          if($delete){
+            echo "<script>window.open(cart.php)</script>";
+          }
+        }
+      }
+    }
+    
+    echo $remove_item = remove_cart();
+  
+  
+  ?>
     
 
 
