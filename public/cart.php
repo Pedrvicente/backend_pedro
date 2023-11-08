@@ -151,7 +151,7 @@ include('../functions/common_function.php');
           if($result_count > 0){
             echo "<h4 class='px-3'>Preço Total: $total_price</h4>
             <input type='submit' value='Continuar a Comprar' name='continue_shopping'>
-            <a href=''><button>Checkout</button></a>
+            <button><a href='../users_area/checkout.php' class='text-dark'>Checkout</a></button>
             ";
           }else{
             echo "<input type='submit' value='Continuar a Comprar' name='continue_shopping'>";

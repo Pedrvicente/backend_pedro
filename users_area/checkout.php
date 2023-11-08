@@ -1,7 +1,6 @@
 <?php 
 
 include('../includes/db.php');
-include('../functions/common_function.php');
 
 ?>
 
@@ -13,7 +12,7 @@ include('../functions/common_function.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lena Earings</title>
+    <title>Checkout</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -39,14 +38,6 @@ include('../functions/common_function.php');
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="cart.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-</svg><sup><?php cart_number(); ?></sup></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Preço Total: <?php total_price()?></a>
-        </li>
     </div>
   </div>
 </nav>
@@ -59,30 +50,27 @@ include('../functions/common_function.php');
             <a class="nav-link" href="#">Welcome Guest</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="../users_area/user_login.php">Login</a>
+            <a class="nav-link" href="#">Login</a>
             </li>
         </ul>
     </nav>
 
     <div class="bg-light">
-        <h3 class="text-center">Lena Earings</h3>
-        <p class="text-center">Bem vindos à minha loja</p>
+        <h3 class="text-center">Checkout</h3>
     </div>
 
 
     <div class="row">
       <div class="col-md-10">
         <div class="row">
+            <?php 
+                if(!isset($_SESSION['username'])){
+                  include('../users_area/user_login.php'); 
+                }else{
+                    include('payment.php'); 
+                }
+            ?>
 
-        <?php
-        cart();
-        fetch_products();
-        categories();
-        $ip = getIPAddress();  
-        // echo 'User Real IP Address - '.$ip; 
-
-        
-        ?>
 
           
 
@@ -90,18 +78,7 @@ include('../functions/common_function.php');
       </div>
 
       <div class="col-md-2  p-0">
-        <!-- categorias -->
-        <ul class="navbar-nav me-auto text-center">
-          <li class="nav-item bg-secondary text-light ">
-            <a href="" class="nav-link"><h3>Categorias</h3></a>
-          </li>
 
-          <?php 
-
-          fetch_categories();
-          
-          ?>
-        </ul>
       </div>
     </div>
 
