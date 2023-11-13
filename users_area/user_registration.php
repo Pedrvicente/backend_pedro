@@ -1,3 +1,10 @@
+<?php
+
+    include('../includes/db.php');
+    include('../functions/common_function.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,3 +60,55 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php  
+
+if(isset($_POST['user_register'])){
+    $username = $_POST['username'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
+    $hide_password = password_hash($user_password, PASSWORD_DEFAULT);
+    $confirm_password = $_POST['confirm_password'];
+    $user_adress = $_POST['user_adress'];
+    $user_mobile = $_POST['user_mobile'];
+    $user_ip = getIPAddress();
+
+
+    $select_query = "SELECT * FROM `user_table` WHERE username='$username' OR user_email='$user_email'";
+
+    $result = mysqli_query($connect, $select_query);
+
+    $rows_count = mysqli_num_rows($result);
+    if($rows_count > 0){
+        echo "<script>alert('Utilizador já existe')</script>";
+    }else if($user_password!=$confirm_password){
+        echo "<script>alert('Passwords não coicidem')</script>";
+    } 
+    
+    else{
+        $insert_query = "INSERT INTO `user_table` (username, user_email, user_password, user_ip, user_adress, user_mobile) VALUES ('$username','$user_email','$hide_password','$user_ip','$user_adress','$user_mobile')";
+
+        $result_query = mysqli_query($connect,$insert_query);
+    
+        if($result_query){
+            echo "<script>alert('Dados inseridos com sucesso')</script>";
+        }else{
+            die(mysqli_error($connect));
+        }
+    }
+
+    $select_cart_items = "SELECT * FROM `cart_details` WHERE ip_adress='$user_ip'";
+    $result_cart = mysqli_query($connect,$select_cart_items);
+    $rows_cart = mysqli_num_rows($result_cart);
+    if($rows_cart > 0){
+        $_SESSION['username'] = $username;
+        "<script>alert('Tens Produtos no Carrinho')</script>";
+        "<script>window.open('checkout.php', '_self' )</script>";
+    }else{
+        "<script>window.open('../public/index.php', '_self' )</script>";
+    }
+    
+}
+
+
+?>

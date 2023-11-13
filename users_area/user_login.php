@@ -1,3 +1,14 @@
+<?php
+
+    include('../includes/db.php');
+    include('../functions/common_function.php');
+    @session_start();
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,3 +48,48 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+<?php
+
+
+    if(isset($_POST['user_login'])){
+        $username = $_POST['username']; 
+        $user_password = $_POST['user_password']; 
+
+        $select_query = "SELECT * FROM `user_table` WHERE username = '$username'";
+        $result = mysqli_query($connect, $select_query);
+        $row_count = mysqli_num_rows($result);
+        $row_data = mysqli_fetch_assoc($result);
+        $user_ip = getIPAddress();
+
+
+        $select_query_cart = "SELECT * FROM `cart_details` WHERE ip_adress = '$user_ip'";
+        $select_cart = mysqli_query($connect, $select_query_cart);
+        $row_count_cart = mysqli_num_rows($select_cart);
+
+
+        if($row_count > 0){
+            $_SESSION['username'] = $username;
+            if(password_verify($user_password,$row_data['user_password'])){
+                
+                // echo "<script>alert('Bem vindo')</script>";
+                if($row_count == 1 and $row_count_cart == 0){
+                    $_SESSION['username'] = $username;
+                    echo "<script>alert('Bem vindo')</script>";
+                    echo "<script>window.open('profile.php', '_self')</script>";
+                }else{
+                    $_SESSION['username'] = $username;
+                    echo "<script>alert('Bem vindo')</script>";
+                    echo "<script>window.open('payment.php', '_self')</script>";
+                }
+            }else{
+                echo "<script>alert('Credênciais Erradas')</script>";
+            }
+
+        }else{
+            echo "<script>alert('Credênciais Erradas')</script>";
+        }
+    }
+
+?>

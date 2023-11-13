@@ -1,6 +1,7 @@
 <?php 
 
 include('../includes/db.php');
+session_start();
 
 ?>
 
@@ -27,7 +28,7 @@ include('../includes/db.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link active" aria-current="page" href="../public/index.php">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products.php">Products</a>
@@ -46,12 +47,33 @@ include('../includes/db.php');
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
         <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-            <a class="nav-link" href="#">Welcome Guest</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
-            </li>
+            <?php 
+            if(!isset($_SESSION['username'])){
+              echo "<li class='nav-item'>
+              <a class='nav-link' href='#'>Bem Vindo Convidado</a>
+              ";
+            }else{
+            echo "<li class='nav-item'>
+              <a class='nav-link' href=''>Bem Vindo ".$_SESSION['username']." </a>
+              </li>
+              ";
+            }
+            
+              if(!isset($_SESSION['username'])){
+                  echo "<li class='nav-item'>
+                  <a class='nav-link' href='user_login.php'>Login</a>
+                  </li>
+                  ";
+              }else{
+                echo "<li class='nav-item'>
+                  <a class='nav-link' href='logout.php'>Logout</a>
+                  </li>
+                  ";
+              }
+
+            ?>
+            
         </ul>
     </nav>
 
@@ -65,7 +87,7 @@ include('../includes/db.php');
         <div class="row">
             <?php 
                 if(!isset($_SESSION['username'])){
-                  include('../users_area/user_login.php'); 
+                  include('user_login.php'); 
                 }else{
                     include('payment.php'); 
                 }
