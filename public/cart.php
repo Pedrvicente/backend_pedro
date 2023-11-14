@@ -64,7 +64,7 @@ session_start();
               ";
             }else{
             echo "<li class='nav-item'>
-              <a class='nav-link' href=''>Bem Vindo ".$_SESSION['username']." </a>
+              <a class='nav-link' href='../users_area/profile.php'>Bem Vindo ".$_SESSION['username']." </a>
               </li>
               ";
             }

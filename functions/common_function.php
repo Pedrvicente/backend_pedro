@@ -18,7 +18,7 @@ function fetch_products(){
           echo "
           <div class='col-md-4 mb-2'>
           <div class='card' style='width: 18rem;'>
-            <img src='../images/rouxos.jpg' class='card-img-top' alt='...'>
+            <img src='../images/$product_image' class='card-img-top' alt='...'>
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$description</p>
@@ -57,7 +57,7 @@ function categories(){
           echo "
           <div class='col-md-4 mb-2'>
           <div class='card' style='width: 18rem;'>
-            <img src='../images/rouxos.jpg' class='card-img-top' alt='...'>
+            <img src='../images/$product_image' class='card-img-top' alt='...'>
             <div class='card-body'>
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$description</p>
@@ -108,7 +108,7 @@ function product_details(){
             echo "
             <div class='col-md-4 mb-2'>
             <div class='card' style='width: 18rem;'>
-                <img src='../images/rouxos.jpg' class='card-img-top' alt='...'>
+                <img src='../images/$product_image' class='card-img-top' alt='...'>
                 <div class='card-body'>
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$description</p>

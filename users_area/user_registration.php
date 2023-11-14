@@ -92,6 +92,7 @@ if(isset($_POST['user_register'])){
     
         if($result_query){
             echo "<script>alert('Dados inseridos com sucesso')</script>";
+            echo "<script>window.open('../public/index.php','_self')</script>";
         }else{
             die(mysqli_error($connect));
         }
