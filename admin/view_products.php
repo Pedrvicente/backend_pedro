@@ -48,7 +48,7 @@
                 ?>
                 </td>
                 <td><?php echo $product_status; ?></td>
-                <td><a href=''>Editar</a></td>
+                <td><a href='index.php?edit_products=<?php echo $product_id; ?>'>Editar</a></td>
                 <td><a href=''>Remover</a></td>
             </tr>
             <?php
