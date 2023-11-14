@@ -1,3 +1,13 @@
+<?php
+
+include('../includes/db.php');
+include('../functions/common_function.php');
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +46,7 @@
                 </div>
                 <div class="button text-center">
                     <button><a href="insert_product.php " class="nav-link text-light bg-secondary my-1">Inserir Produtos</a></button>
-                    <button><a href="" class="nav-link text-light bg-secondary my-1">Ver Produtos</a></button>
+                    <button><a href="index.php?view_products" class="nav-link text-light bg-secondary my-1">Ver Produtos</a></button>
                     <button><a href="index.php?insert_category" class="nav-link text-light bg-secondary my-1">Inserir Categorias</a></button>
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Ver Categoria</a>s</button>
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Encomendas</a></button>
@@ -51,7 +61,9 @@
                         if(isset($_GET['insert_category'])){
                             include('insert_categories.php');
                         };
-                    
+                        if(isset($_GET['view_products'])){
+                            include('view_products.php');
+                        };
                     ?>
                 </div>
             </div>
