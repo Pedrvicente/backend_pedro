@@ -107,7 +107,7 @@ session_start();
                     <a href="profile.php?edit_account">Editar Conta</a>
                 </li>
                 <li class="nav-item">
-                    <a href="profile.php?my_orders">Minhas Encomendas</a>
+                    <a href="profile.php?user_orders">Minhas Encomendas</a>
                 </li>
                 <li class="nav-item">
                     <a href="profile.php?delete_account">Apagar Conta</a>
@@ -123,7 +123,7 @@ session_start();
             if(isset($_GET['edit_account'])){
                 include('edit_account.php');
             }
-            if(isset($_GET['my_orders'])){
+            if(isset($_GET['user_orders'])){
                 include('user_orders.php');
             }
             if(isset($_GET['delete_account'])){

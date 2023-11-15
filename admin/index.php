@@ -2,7 +2,10 @@
 
 include('../includes/db.php');
 include('../functions/common_function.php');
-
+session_start();
+if(empty($_SESSION['admin_name'])){
+    echo "<script>window.open('admin_login.php','_self')</script>";
+}
 ?>
 
 
@@ -26,7 +29,37 @@ include('../functions/common_function.php');
                 <nav class="navbar navbar-expand-lg">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Welcome Guest</a>
+                            <a href="" class="nav-link">
+
+                            <?php 
+
+                            if(!isset($_SESSION['admin_name'])){
+                                echo "<li class='nav-item'>
+                                <a class='nav-link' href='#'>Bem Vindo Convidado</a>
+                                ";
+                            }else{
+                            echo "<li class='nav-item'>
+                                <a class='nav-link' href='admin_profile.php'>Bem Vindo ".$_SESSION['admin_name']." </a>
+                                </li>
+                                ";
+                            }
+
+
+                            
+                            if(!isset($_SESSION['admin_name'])){
+                                echo "<li class='nav-item'>
+                                <a class='nav-link' href='admin_login.php'>Login</a>
+                                </li>
+                                ";
+                            }else{
+                                echo "<li class='nav-item'>
+                                <a class='nav-link' href='../users_area/logout.php'>Logout</a>
+                                </li>
+                                ";
+                            }
+
+                            ?>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -51,8 +84,9 @@ include('../functions/common_function.php');
                     <button><a href="index.php?view_categories" class="nav-link text-light bg-secondary my-1">Ver Categorias</a>s</button>
                     <button><a href="index.php?view_orders" class="nav-link text-light bg-secondary my-1">Encomendas</a></button>
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Pagamentos</a></button>
-                    <button><a href="" class="nav-link text-light bg-secondary my-1">Users</a></button>
-                    <button><a href="" class="nav-link text-light bg-secondary my-1">Logout</a></button>
+                    <button><a href="index.php?view_users" class="nav-link text-light bg-secondary my-1">Users</a></button>
+                    <button><a href="index.php?admin_profile" class="nav-link text-light bg-secondary my-1">Meu perfil</a></button>
+                    <button><a href="../users_area/logout.php" class="nav-link text-light bg-secondary my-1">Logout</a></button>
                 </div>
 
                 <div class="container my-5">
@@ -84,6 +118,15 @@ include('../functions/common_function.php');
                         };
                         if(isset($_GET['delete_order'])){
                             include('delete_order.php');
+                        };
+                        if(isset($_GET['view_users'])){
+                            include('view_users.php');
+                        };
+                        if(isset($_GET['delete_user'])){
+                            include('delete_user.php');
+                        };
+                        if(isset($_GET['admin_profile'])){
+                            include('admin_profile.php');
                         };
                     ?>
                 </div>
