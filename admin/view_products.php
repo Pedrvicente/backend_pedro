@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ver Produtos</title>
 </head>
 <body>
     <h1 class="text-center">Ver Produtos</h1>
@@ -41,7 +41,7 @@
                 <td><?php echo $product_price; ?></td>
                 <td>
                 <?php
-                    $select_count = "SELECt * FROM `pending_orders` WHERE product_id='$product_id'";
+                    $select_count = "SELECT * FROM `pending_orders` WHERE product_id='$product_id'";
                     $result_count = mysqli_query($connect, $select_count);
                     $rows_count = mysqli_num_rows($result_count);
                     echo $rows_count;
