@@ -48,8 +48,8 @@ include('../functions/common_function.php');
                     <button><a href="insert_product.php " class="nav-link text-light bg-secondary my-1">Inserir Produtos</a></button>
                     <button><a href="index.php?view_products" class="nav-link text-light bg-secondary my-1">Ver Produtos</a></button>
                     <button><a href="index.php?insert_category" class="nav-link text-light bg-secondary my-1">Inserir Categorias</a></button>
-                    <button><a href="index.php?view_categories" class="nav-link text-light bg-secondary my-1">Ver Categoria</a>s</button>
-                    <button><a href="" class="nav-link text-light bg-secondary my-1">Encomendas</a></button>
+                    <button><a href="index.php?view_categories" class="nav-link text-light bg-secondary my-1">Ver Categorias</a>s</button>
+                    <button><a href="index.php?view_orders" class="nav-link text-light bg-secondary my-1">Encomendas</a></button>
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Pagamentos</a></button>
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Users</a></button>
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Logout</a></button>
@@ -78,6 +78,12 @@ include('../functions/common_function.php');
                         };
                         if(isset($_GET['remove_category'])){
                             include('remove_category.php');
+                        };
+                        if(isset($_GET['view_orders'])){
+                            include('view_orders.php');
+                        };
+                        if(isset($_GET['delete_order'])){
+                            include('delete_order.php');
                         };
                     ?>
                 </div>
