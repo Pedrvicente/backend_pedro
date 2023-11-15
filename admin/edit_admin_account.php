@@ -17,6 +17,7 @@
             $update_id = $admin_id;
             $admin_name = $_POST['admin_name'];
             $user_password = $_POST['admin_password'];
+            $hide_password = password_hash($user_password, PASSWORD_DEFAULT);
             $admin_email = $_POST['admin_email'];
 
 
@@ -49,7 +50,7 @@
         <input type="text" name="admin_name" id="" value="<?php echo $admin_name ?>" class="form-control w-50 m-auto">
     </div>
     <div class="mb-4">
-        <input type="text" name="admin__password" id="" value="<?php echo $admin_password ?>" class="form-control w-50 m-auto">
+        <input type="password" name="admin__password" id="" value="<?php echo $hide_password ?>" class="form-control w-50 m-auto">
     </div>
     <div class="mb-4">
         <input type="email" name="admin_email" id="" value="<?php echo $admin_email ?>" class="form-control w-50 m-auto">

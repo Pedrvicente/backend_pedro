@@ -29,7 +29,6 @@
         </tr>
 
         <?php
-
         $get_order = "SELECT * FROM `user_orders` WHERE user_id='$user_id'";
         $result_orders = mysqli_query($connect, $get_order);
         $number = 1;
@@ -58,7 +57,6 @@
                 <td><a href='confirm_payment.php'>Confirmar</a></td>
             </tr>
             ";
-
             $number++;
         }
 

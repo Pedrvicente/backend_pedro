@@ -31,7 +31,7 @@ include('../includes/db.php');
                     <a href="admin_profile.php?delete_admin_account">Apagar Conta</a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout.php">Logout</a>
+                    <a href="../users_area/logout.php">Logout</a>
                 </li>
             </ul>
         </div>

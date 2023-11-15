@@ -11,7 +11,8 @@ if(isset($_GET['edit_products'])){
     $product_image = $row_data['product_image'];
     $product_price = $row_data['product_price'];
 
-    
+     
+    var_dump($category_id);
     $select_category = "SELECT * FROM `categories` WHERE category_id=$category_id";
     $result_category = mysqli_query($connect, $select_category);
     $row_category = mysqli_fetch_assoc($result_category);
@@ -51,7 +52,7 @@ if(isset($_GET['edit_products'])){
 
             <div class="form-outline mb-4 w-50 m-auto">
                 <select name="product_category" id="" class="form-select">
-                    <option value="<?php echo $category_name ?>"><?php echo $category_name ?></option>
+                    <option value="<?php echo $category_id ?>"><?php echo $category_name ?></option>
                     <?php
 
 
@@ -60,7 +61,7 @@ if(isset($_GET['edit_products'])){
                     while($row_categories_all = mysqli_fetch_assoc($result_categories_all)){
                         $category_name = $row_categories_all['category_title'];
                         $category_id = $row_categories_all['category_id'];
-                        echo "<option value='$category_name'>$category_name</option>";
+                        echo "<option value='$category_id'>$category_name</option>";
                     }
                     
 
