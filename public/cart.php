@@ -133,7 +133,7 @@ session_start();
             <tbody>
                 <tr>
                     <td><?php echo $product_title?></td>
-                    <td><img src="../images/<?php $product_image ?>"></td>
+                    <td><img src="../images/<?php echo $product_image ?>" width="60"></td>
                     <td><input type="text" name="quantity"></td>
                     <?php 
                       $fetch_ip = getIPAddress(); 
