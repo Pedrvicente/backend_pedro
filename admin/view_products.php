@@ -49,7 +49,7 @@
                 </td>
                 <td><?php echo $product_status; ?></td>
                 <td><a href='index.php?edit_products=<?php echo $product_id; ?>'>Editar</a></td>
-                <td><a href=''>Remover</a></td>
+                <td><a href='index.php?delete_product=<?php echo $product_id; ?>'>Remover</a></td>
             </tr>
             <?php
             }

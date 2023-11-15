@@ -46,7 +46,7 @@ if(isset($_GET['edit_products'])){
 
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="description" class="form-label">Descrição</label>
-                <input type="text" name="description" id="description" class="form-control" placeholder="Descrição" autocomplete="off" value="<?php echo $product_description ?>" required>
+                <input type="text" name="product_description" id="description" class="form-control" placeholder="Descrição" autocomplete="off" value="<?php echo $product_description ?>" required>
             </div>
 
             <div class="form-outline mb-4 w-50 m-auto">
@@ -84,5 +84,32 @@ if(isset($_GET['edit_products'])){
             </div>
         </form>
     </div>
+    <?php
+
+
+        if(isset($_POST['edit_product'])){
+            $product_title = $_POST['product_title'];
+            $product_description = $_POST['product_description'];
+            $product_category = $_POST['product_category'];
+            $product_image = $_FILES['product_image']['name'];
+            $tmp_image = $_FILES['product_image']['tmp_name'];
+            $product_price = $_POST['product_price'];
+
+            if($product_title == '' or $product_description == '' or $product_category == '' or $product_image == '' or $product_price == ''){
+                echo "<script>alert('Por favor preencha todos os campos')</script>";
+            }else{
+                move_uploaded_file($tmp_image,"../images/$product_image");
+
+                $update = " UPDATE `products` SET product_title='$product_title',product_description='$product_description',category_id='$product_category', product_image='$product_image',product_price='$product_price', DATE=NOW() WHERE product_id=$get_id";
+                $result_update = mysqli_query($connect, $update);
+                if($result_update){
+                    echo "<script>alert('Alterações feitas com sucesso')</script>";
+                    echo "<script>window.open('index.php','_self')</script>";
+                }
+
+        }
+    }
+    
+    ?>
 </body>
 </html>
