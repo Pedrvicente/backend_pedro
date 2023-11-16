@@ -4,6 +4,38 @@ include('../includes/db.php');
 include('../functions/common_function.php');
 session_start();
 
+$message_sent = false;
+if(isset($_POST['submit'])){
+
+    if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $message = $_POST['message'];
+
+        $to = "pedro11gil@outlook.com";
+        $body = "";
+
+
+        $body .="From: ".$name. "\r\n";
+        $body .="Email: ".$email. "\r\n";
+        $body .="Message: ".$message. "\r\n";
+
+
+        //mail($to,$message,$body);
+
+        $message_sent = true;
+    }else{
+        echo "<script>alert('Preencha Corretamente')</script>";
+    }
+}
+if($message_sent){
+    echo "<script>alert('Obrigado pela mensagem')</script>";
+    echo "<script>window.open('index.php','_self')</script>";
+}else{
+    echo "<script>window.open('contact.php','_self')</script>";
+}
+
 ?>
 
 
@@ -38,7 +70,7 @@ session_start();
           <a class="nav-link" href="../users_area/user_registration.php">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact.php">Contact</a>
+          <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -52,93 +84,24 @@ session_start();
   </div>
 </nav>
     </div>
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-        <ul class="navbar-nav me-auto">
-            
-            </li>
-            <?php 
-
-              if(!isset($_SESSION['username'])){
-                echo "<li class='nav-item'>
-                <a class='nav-link' href='#'>Bem Vindo Convidado</a>
-                ";
-              }else{
-              echo "<li class='nav-item'>
-                <a class='nav-link' href='../users_area/profile.php'>Bem Vindo ".$_SESSION['username']." </a>
-                </li>
-                ";
-              }
-
-
-            
-              if(!isset($_SESSION['username'])){
-                  echo "<li class='nav-item'>
-                  <a class='nav-link' href='../users_area/user_login.php'>Login</a>
-                  </li>
-                  ";
-              }else{
-                echo "<li class='nav-item'>
-                  <a class='nav-link' href='../users_area/logout.php'>Logout</a>
-                  </li>
-                  ";
-              }
-
-            ?>
-        </ul>
-    </nav>
-
-    <div class="bg-light">
-        <h3 class="text-center">Lena Earings</h3>
-        <p class="text-center">Bem vindos à minha loja</p>
-    </div>
-
-
-    <div class="row">
-      <div class="col-md-10">
-        <div class="row">
-
-        <?php
-        cart();
-        fetch_products();
-        categories();
-        $ip = getIPAddress();  
-        // echo 'User Real IP Address - '.$ip; 
-
-        
-        ?>
-
-          
-
+    <h3 class="text-center mt-4">Entre em Contacto Comigo</h3>
+    <form action="" method="post">
+        <div class="mb-4">
+            <input type="text" name="name" placeholder="Nome" class="form-control w-50 m-auto" required>
         </div>
-      </div>
-
-      <div class="col-md-2  p-0">
-        <!-- categorias -->
-        <ul class="navbar-nav me-auto text-center">
-          <li class="nav-item bg-secondary text-light ">
-            <a href="" class="nav-link"><h3>Categorias</h3></a>
-          </li>
-
-          <?php 
-
-          fetch_categories();
-          
-          ?>
-        </ul>
-      </div>
-    </div>
-
-    
-
-
-    <div class="bg-info  p-3  text-center">
-        <p>All Rights Reserved</p>
-    </div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
+        <div class="mb-4">
+        <input type="text" name="email" placeholder="Email" class="form-control w-50 m-auto" required>
+        </div>
+        <div class="mb-4">
+            <input type="text" name="subject" placeholder="Assunto" class="form-control w-50 m-auto" required>
+        </div>
+        <div class="mb-4">
+             <textarea name="message" id="" cols="30" rows="10" placeholder="Mensagem" class="form-control w-50 m-auto"></textarea required>
+        </div>
+        <div class="mb-4">
+             <button type="submit" name="submit" class="form-control w-50 m-auto">Submeter</button>
+        </div>
+        
+    </form>
+    </body>
 </html>
-

@@ -37,7 +37,7 @@ session_start();
           <a class="nav-link" href="#">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="../public/contact.php">Contact</a>
         </li>
     </div>
   </div>

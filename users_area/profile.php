@@ -38,7 +38,7 @@ session_start();
           <a class="nav-link" href="profile.php">Minha Conta</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="../public/contact.php">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../public/cart.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
