@@ -8,7 +8,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
         $select_user = "SELECT * FROM `user_table` WHERE user_ip = '$user_ip'";
         $result = mysqli_query($connect, $select_user);
         $run_query = mysqli_fetch_array($result);
-        $user_id = $run_query['user_id'];
+        $user_id = mysqli_real_escape_string($connect,$run_query['user_id']);
     
     ?>
     <div class="container">

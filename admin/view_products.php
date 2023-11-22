@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,11 +27,11 @@
             $result = mysqli_query($connect, $select_products);
             $number = 0;
             while($row=mysqli_fetch_assoc($result)){
-                $product_id = $row['product_id'];
-                $product_title = $row['product_title'];
-                $product_image = $row['product_image'];
-                $product_price = $row['product_price'];
-                $product_status = $row['status'];
+                $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+                $product_title = mysqli_real_escape_string($connect,$row['product_title']);
+                $product_image = mysqli_real_escape_string($connect,$row['product_image']);
+                $product_price = mysqli_real_escape_string($connect,$row['product_price']);
+                $product_status = mysqli_real_escape_string($connect,$row['status']);
                 $number++;
                 ?>
                 <tr>

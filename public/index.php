@@ -32,13 +32,13 @@ session_start();
           <a class="nav-link active" aria-current="page" href="../public/index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="products.php">Products</a>
+          <a class="nav-link" href="products.php">Produtos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../users_area/user_registration.php">Register</a>
+          <a class="nav-link" href="../users_area/user_registration.php">Registar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact.php">Contact</a>
+          <a class="nav-link" href="contact.php">Contactos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -134,7 +134,7 @@ session_start();
 
 
     <div class="bg-info  p-3  text-center">
-        <p>All Rights Reserved</p>
+        <p>2023</p>
     </div>
 
 

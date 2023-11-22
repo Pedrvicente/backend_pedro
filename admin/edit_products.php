@@ -1,22 +1,22 @@
 <?php
 
 if(isset($_GET['edit_products'])){
-    $get_id = $_GET['edit_products'];
+    $get_id = mysqli_real_escape_string($connect,$_GET['edit_products']);
     $select_data = "SELECT * FROM `products` WHERE product_id = '$get_id'";
     $result = mysqli_query($connect,$select_data);
     $row_data = mysqli_fetch_assoc($result);
-    $product_title = $row_data['product_title'];
-    $product_description = $row_data['product_description'];
-    $category_id = $row_data['category_id'];
-    $product_image = $row_data['product_image'];
-    $product_price = $row_data['product_price'];
+    $product_title = mysqli_real_escape_string($connect,$row_data['product_title']);
+    $product_description = mysqli_real_escape_string($connect,$row_data['product_description']);
+    $category_id = mysqli_real_escape_string($connect,$row_data['category_id']);
+    $product_image = mysqli_real_escape_string($connect,$row_data['product_image']);
+    $product_price = mysqli_real_escape_string($connect,$row_data['product_price']);
 
      
     var_dump($category_id);
     $select_category = "SELECT * FROM `categories` WHERE category_id=$category_id";
     $result_category = mysqli_query($connect, $select_category);
     $row_category = mysqli_fetch_assoc($result_category);
-    $category_name = $row_category['category_title'];
+    $category_name = mysqli_real_escape_string($connect,$row_category['category_title']);
     
 }
 
@@ -28,7 +28,7 @@ if(isset($_GET['edit_products'])){
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,8 +59,8 @@ if(isset($_GET['edit_products'])){
                     $select_categories_all = "SELECT * FROM `categories`";
                     $result_categories_all = mysqli_query($connect, $select_categories_all);
                     while($row_categories_all = mysqli_fetch_assoc($result_categories_all)){
-                        $category_name = $row_categories_all['category_title'];
-                        $category_id = $row_categories_all['category_id'];
+                        $category_name = mysqli_real_escape_string($connect,$row_categories_all['category_title']);
+                        $category_id = mysqli_real_escape_string($connect,$row_categories_all['category_id']);
                         echo "<option value='$category_id'>$category_name</option>";
                     }
                     
@@ -89,12 +89,12 @@ if(isset($_GET['edit_products'])){
 
 
         if(isset($_POST['edit_product'])){
-            $product_title = $_POST['product_title'];
-            $product_description = $_POST['product_description'];
-            $product_category = $_POST['product_category'];
-            $product_image = $_FILES['product_image']['name'];
-            $tmp_image = $_FILES['product_image']['tmp_name'];
-            $product_price = $_POST['product_price'];
+            $product_title = mysqli_real_escape_string($connect,$_POST['product_title']);
+            $product_description = mysqli_real_escape_string($connect,$_POST['product_description']);
+            $product_category = mysqli_real_escape_string($connect,$_POST['product_category']);
+            $product_image = mysqli_real_escape_string($connect,$_FILES['product_image']['name']);
+            $tmp_image = mysqli_real_escape_string($connect,$_FILES['product_image']['tmp_name']);
+            $product_price = mysqli_real_escape_string($connect,$_POST['product_price']);
 
             if($product_title == '' or $product_description == '' or $product_category == '' or $product_image == '' or $product_price == ''){
                 echo "<script>alert('Por favor preencha todos os campos')</script>";

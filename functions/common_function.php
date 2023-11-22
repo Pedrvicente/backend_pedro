@@ -8,13 +8,13 @@ function fetch_products(){
         $fetch_products = mysqli_query($connect, $select_query);
 
         while( $row = mysqli_fetch_assoc($fetch_products)){
-          $product_id = $row['product_id'];
-          $product_title = $row['product_title'];
-          $description = $row['product_description'];
-          $product_id = $row['product_id'];
-          $category_id = $row['category_id'];
-          $product_image = $row['product_image'];
-          $product_price = $row['product_price'];
+          $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+          $product_title = mysqli_real_escape_string($connect,$row['product_title']);
+          $description = mysqli_real_escape_string($connect,$row['product_description']);
+          $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+          $category_id = mysqli_real_escape_string($connect,$row['category_id']);
+          $product_image = mysqli_real_escape_string($connect,$row['product_image']);
+          $product_price = mysqli_real_escape_string($connect,$row['product_price']);
           echo "
           <div class='col-md-4 mb-2'>
           <div class='card' style='width: 18rem;'>
@@ -23,8 +23,8 @@ function fetch_products(){
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$description</p>
               <p class='card-text'>Preço: $product_price</p>
-              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
-              <a href='product_details.php?product_id=$product_id' class='btn btn-secondary' >View More</a>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Adicionar</a>
+              <a href='product_details.php?product_id=$product_id' class='btn btn-secondary' >Ver Mais</a>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ function categories(){
     global $connect;
     if(isset($_GET['category'])){
 
-        $category_id = $_GET['category'];
+        $category_id = mysqli_real_escape_string($connect,$_GET['category']);
         $select_query = "SELECT * FROM `products` WHERE category_id=$category_id";
         $fetch_products = mysqli_query($connect, $select_query);
         $num_products = mysqli_num_rows($fetch_products);
@@ -47,13 +47,13 @@ function categories(){
         }
 
         while( $row = mysqli_fetch_assoc($fetch_products)){
-          $product_id = $row['product_id'];
-          $product_title = $row['product_title'];
-          $description = $row['product_description'];
-          $product_id = $row['product_id'];
-          $category_id = $row['category_id'];
-          $product_image = $row['product_image'];
-          $product_price = $row['product_price'];
+          $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+          $product_title = mysqli_real_escape_string($connect,$row['product_title']);
+          $description = mysqli_real_escape_string($connect,$row['product_description']);
+          $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+          $category_id = mysqli_real_escape_string($connect,$row['category_id']);
+          $product_image = mysqli_real_escape_string($connect,$row['product_image']);
+          $product_price = mysqli_real_escape_string($connect,$row['product_price']);
           echo "
           <div class='col-md-4 mb-2'>
           <div class='card' style='width: 18rem;'>
@@ -62,8 +62,8 @@ function categories(){
               <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$description</p>
               <p class='card-text'>Preço: $product_price</p>
-              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
-              <a href='#' class='btn btn-secondary' >View More</a>
+              <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Adicionar</a>
+              <a href='#' class='btn btn-secondary' >Ver Mais</a>
             </div>
           </div>
         </div>
@@ -79,8 +79,8 @@ function fetch_categories(){
           $fetch_categories =  mysqli_query($connect, $select_categories);
 
           while($data = mysqli_fetch_assoc($fetch_categories)){
-            $category_title = $data['category_title'];
-            $category_id = $data['category_id'];
+            $category_title = mysqli_real_escape_string($connect,$data['category_title']);
+            $category_id = mysqli_real_escape_string($connect,$data['category_id']);
 
             echo "<li class='nav-item'>
             <a href='index.php?category=$category_id' class='nav-link'>$category_title</a>
@@ -93,18 +93,18 @@ function product_details(){
     global $connect;
     if(isset($_GET['product_id'])){
         if(!isset($_GET['category'])){
-            $product_id = $_GET['product_id'];
+            $product_id = mysqli_real_escape_string($connect,$_GET['product_id']);
             $select_query = "SELECT * FROM `products`  WHERE product_id=$product_id";
             $fetch_products = mysqli_query($connect, $select_query);
 
             while( $row = mysqli_fetch_assoc($fetch_products)){
-            $product_id = $row['product_id'];
-            $product_title = $row['product_title'];
-            $description = $row['product_description'];
-            $product_id = $row['product_id'];
-            $category_id = $row['category_id'];
-            $product_image = $row['product_image'];
-            $product_price = $row['product_price'];
+            $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+            $product_title = mysqli_real_escape_string($connect,$row['product_title']);
+            $description = mysqli_real_escape_string($connect,$row['product_description']);
+            $product_id = mysqli_real_escape_string($connect,$row['product_id']);
+            $category_id = mysqli_real_escape_string($connect,$row['category_id']);
+            $product_image = mysqli_real_escape_string($connect,$row['product_image']);
+            $product_price = mysqli_real_escape_string($connect,$row['product_price']);
             echo "
             <div class='col-md-4 mb-2'>
             <div class='card' style='width: 18rem;'>
@@ -113,7 +113,7 @@ function product_details(){
                 <h5 class='card-title'>$product_title</h5>
                 <p class='card-text'>$description</p>
                 <p class='card-text'>Preço: $product_price</p>
-                <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Add to Cart</a>
+                <a href='index.php?add_to_cart=$product_id' class='btn btn-primary'>Adicionar</a>
                 </div>
             </div>
             </div>
@@ -146,7 +146,7 @@ function cart(){
   if(isset($_GET['add_to_cart'])){
     global $connect;
     $fetch_ip = getIPAddress();  
-    $fetch_product_id = $_GET['add_to_cart'];
+    $fetch_product_id = mysqli_real_escape_string($connect,$_GET['add_to_cart']);
      $select_query = "SELECT * FROM `cart_details` WHERE ip_adress='$fetch_ip' AND product_id=$fetch_product_id";
      $result_query = mysqli_query($connect, $select_query);
      $num_rows = mysqli_num_rows($result_query);
@@ -189,11 +189,11 @@ function cart_number(){
         $cart_query = "SELECT * FROM `cart_details` WHERE ip_adress='$fetch_ip'";
         $result_query = mysqli_query($connect, $cart_query);
         while($row= mysqli_fetch_array($result_query)){
-          $product_id = $row['product_id'];
+          $product_id = mysqli_real_escape_string($connect,$row['product_id']);
           $fetch_products = "SELECT * FROM `products` WHERE product_id='$product_id'";
           $result_products = mysqli_query($connect, $fetch_products);
           while($row_price= mysqli_fetch_array($result_products)){
-            $product_price = array($row_price['product_price']);
+            $product_price = array(mysqli_real_escape_string($connect,$row_price['product_price']));
             $product_values = array_sum($product_price);
             $total_price+=$product_values;
           }

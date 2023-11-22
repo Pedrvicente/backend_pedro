@@ -10,7 +10,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,6 @@
                     </div>
                     <div>
                         <input type="submit" value="Login" name="admin_login">
-                        <p>Ainda não tem conta? <a href="admin_registration.php">Criar Conta</a> </p>
                     </div>
                 </form>
             </div>
@@ -46,8 +45,8 @@
 
     <?php
     if(isset($_POST['admin_login'])){
-        $admin_name = $_POST['admin_name']; 
-        $admin_password = $_POST['admin_password']; 
+        $admin_name = mysqli_real_escape_string($connect,$_POST['admin_name']); 
+        $admin_password = mysqli_real_escape_string($connect,$_POST['admin_password']); 
 
         $select_query = "SELECT * FROM `admin_table` WHERE admin_name = '$admin_name'";
         $result = mysqli_query($connect, $select_query);
@@ -58,7 +57,7 @@
 
         if($row_count > 0){
             $_SESSION['admin_name'] = $admin_name;
-            if(password_verify($admin_password,$row_data['admin_password'])){
+            if(password_verify($admin_password,mysqli_real_escape_string($connect,$row_data['admin_password']))){
                 
                 if($row_count == 1 and $row_count_cart == 0){
                     $_SESSION['admin_name'] = $admin_name;

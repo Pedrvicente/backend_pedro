@@ -4,15 +4,15 @@ include('../includes/db.php');
 if(isset($_POST['insert_product'])){
     
 
-    $product_title = $_POST['product_title'];
-    $description = $_POST['description'];
-    $product_category = $_POST['product_category'];
-    $product_price = $_POST['product_price'];
+    $product_title = mysqli_real_escape_string($connect,$_POST['product_title']);
+    $description = mysqli_real_escape_string($connect,$_POST['description']);
+    $product_category = mysqli_real_escape_string($connect,$_POST['product_category']);
+    $product_price = mysqli_real_escape_string($connect,$_POST['product_price']);
     $product_status = 'true';
 
 
-    $product_image = $_FILES['product_image']['name'];
-    $temp_image = $_FILES['product_image']['tmp_name'];
+    $product_image = mysqli_real_escape_string($connect,$_FILES['product_image']['name']);
+    $temp_image = mysqli_real_escape_string($connect,$_FILES['product_image']['tmp_name']);
 
 
      if($product_title == '' or $description == '' or $product_category == '' or $product_price == '' or $product_image == ''){
@@ -37,7 +37,7 @@ if(isset($_POST['insert_product'])){
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,8 +73,8 @@ if(isset($_POST['insert_product'])){
                         $result_query = mysqli_query($connect, $select_query);
 
                         while($row = mysqli_fetch_assoc($result_query)){
-                            $category_title = $row['category_title'];
-                            $category_id = $row['category_id'];
+                            $category_title = mysqli_real_escape_string($connect,$row['category_title']);
+                            $category_id = mysqli_real_escape_string($connect,$row['category_id']);
                             echo "<option value='$category_id'>$category_title</option>";
                         }
                     ?>

@@ -1,16 +1,16 @@
 <?php
 
     if(isset($_GET['edit_category'])){
-        $get_id = $_GET['edit_category'];
+        $get_id = mysqli_real_escape_string($connect,$_GET['edit_category']);
         $select_category = "SELECT * FROM `categories` WHERE category_id='$get_id'";
         $result = mysqli_query($connect,$select_category);
         $row_data = mysqli_fetch_assoc($result);
-        $category_title = $row_data['category_title'];
+        $category_title = mysqli_real_escape_string($connect,$row_data['category_title']);
     }
 
 
     if(isset($_POST['edit_category'])){
-        $category_title = $_POST['category_title'];
+        $category_title = mysqli_real_escape_string($connect,$_POST['category_title']);
         $update = " UPDATE `categories` SET category_title='$category_title' WHERE category_id=$get_id";
         $result_update = mysqli_query($connect, $update);
             if($result_update){
@@ -29,7 +29,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

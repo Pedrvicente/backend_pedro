@@ -5,7 +5,7 @@ include('../functions/common_function.php');
 
 
 if(isset($_GET['user_id'])){
-    $user_id = $_GET['user_id'];
+    $user_id = mysqli_real_escape_string($connect,$_GET['user_id']);
 
 }
 
@@ -19,11 +19,11 @@ $invoice_number = mt_rand();
 $status = 'pending';
 $count_products = mysqli_num_rows($result_cart_price);
 while($row_price = mysqli_fetch_assoc($result_cart_price)){
-    $fetch_product_id = $row_price['product_id'];
+    $fetch_product_id = mysqli_real_escape_string($connect,$row_price['product_id']);
     $select_product = "SELECT * FROM `products` WHERE product_id = $fetch_product_id";
     $result_price = mysqli_query($connect, $select_product);
     while($row_product_price = mysqli_fetch_array($result_price)){
-        $product_price = array($row_product_price['product_price']);
+        $product_price = array(mysqli_real_escape_string($connect,$row_product_price['product_price']));
         $product_values = array_sum($product_price);
         $total_price += $product_values;
     }
@@ -33,7 +33,7 @@ while($row_price = mysqli_fetch_assoc($result_cart_price)){
 $select_cart = "SELECT * FROM `cart_details`";
 $result_cart = mysqli_query($connect, $select_cart);
 $get_item_quantity = mysqli_fetch_array($result_cart);
-$quantity = $get_item_quantity['quantity'];
+$quantity = mysqli_real_escape_string($connect,$get_item_quantity['quantity']);
 if($quantity == 0){
     $quantity = 1;
     $subtotal = $total_price;
@@ -57,6 +57,7 @@ $result_pending = mysqli_query($connect, $insert_pending_orders);
 
 $empty_cart = "DELETE FROM `cart_details` WHERE ip_adress='$fetch_ip'";
 $result_delete = mysqli_query($connect, $empty_cart);
+ 
 
 
 ?>

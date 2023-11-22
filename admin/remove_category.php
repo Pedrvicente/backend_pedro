@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <?php
 
         if(isset($_GET['remove_category'])){
-            $delete_id = $_GET['remove_category'];
+            $delete_id = mysqli_real_escape_string($connect,$_GET['remove_category']);
             $delete_category = "DELETE FROM `categories` WHERE category_id = $delete_id";
             $result_category = mysqli_query($connect, $delete_category);
             if($result_category){

@@ -12,7 +12,7 @@ if(empty($_SESSION['admin_name'])){
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,16 +67,12 @@ if(empty($_SESSION['admin_name'])){
          </nav>
 
          <div class="bg-light">
-            <h3 class="text-center p-2">Manage Details</h3>
+            <h3 class="text-center p-2">Painel Administrador</h3>
          </div>
 
 
          <div class="row">
             <div class="col-md-12 bg-secondary p-1">
-                <div>
-                    <a href="#"><img src=" " alt=""></a>
-                    <p class="text-light text-center">Admin Name</p>
-                </div>
                 <div class="button text-center">
                     <button><a href="insert_product.php " class="nav-link text-light bg-secondary my-1">Inserir Produtos</a></button>
                     <button><a href="index.php?view_products" class="nav-link text-light bg-secondary my-1">Ver Produtos</a></button>
@@ -86,6 +82,7 @@ if(empty($_SESSION['admin_name'])){
                     <button><a href="" class="nav-link text-light bg-secondary my-1">Pagamentos</a></button>
                     <button><a href="index.php?view_users" class="nav-link text-light bg-secondary my-1">Users</a></button>
                     <button><a href="index.php?admin_profile" class="nav-link text-light bg-secondary my-1">Meu perfil</a></button>
+                    <button><a href="index.php?admin_registration" class="nav-link text-light bg-secondary my-1">Registar</a></button>
                     <button><a href="../users_area/logout.php" class="nav-link text-light bg-secondary my-1">Logout</a></button>
                 </div>
 
@@ -121,6 +118,9 @@ if(empty($_SESSION['admin_name'])){
                         };
                         if(isset($_GET['view_users'])){
                             include('view_users.php');
+                        };
+                        if(isset($_GET['admin_registration'])){
+                            include('admin_registration.php');
                         };
                         if(isset($_GET['delete_user'])){
                             include('delete_user.php');

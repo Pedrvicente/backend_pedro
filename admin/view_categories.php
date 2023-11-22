@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,8 @@
                 $result = mysqli_query($connect, $select_category);
                 $number = 0;
                 while($row = mysqli_fetch_assoc($result)){
-                    $category_id = $row['category_id'];
-                    $category_title = $row['category_title'];
+                    $category_id = mysqli_real_escape_string($connect,$row['category_id']);
+                    $category_title = mysqli_real_escape_string($connect,$row['category_title']);
                     $number++;
 
             ?>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,11 +25,11 @@
             $result = mysqli_query($connect, $select_user);
             $number = 0;
             while($row=mysqli_fetch_assoc($result)){
-                $user_id = $row['user_id'];
-                $username = $row['username'];
-                $user_email = $row['user_email'];
-                $user_adress = $row['user_adress'];
-                $user_mobile = $row['user_mobile'];
+                $user_id = mysqli_real_escape_string($connect,$row['user_id']);
+                $username = mysqli_real_escape_string($connect,$row['username']);
+                $user_email = mysqli_real_escape_string($connect,$row['user_email']);
+                $user_adress = mysqli_real_escape_string($connect,$row['user_adress']);
+                $user_mobile = mysqli_real_escape_string($connect,$row['user_mobile']);
                 $number++;
                 ?>
                 <tr>

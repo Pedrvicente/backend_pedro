@@ -6,7 +6,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,13 +64,13 @@
 <?php  
 
 if(isset($_POST['user_register'])){
-    $username = $_POST['username'];
-    $user_email = $_POST['user_email'];
-    $user_password = $_POST['user_password'];
+    $username = mysqli_real_escape_string($connect,$_POST['username']);
+    $user_email = mysqli_real_escape_string($connect,$_POST['user_email']);
+    $user_password = mysqli_real_escape_string($connect,$_POST['user_password']);
     $hide_password = password_hash($user_password, PASSWORD_DEFAULT);
-    $confirm_password = $_POST['confirm_password'];
-    $user_adress = $_POST['user_adress'];
-    $user_mobile = $_POST['user_mobile'];
+    $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
+    $user_adress = mysqli_real_escape_string($connect,$_POST['user_adress']);
+    $user_mobile = mysqli_real_escape_string($connect,$_POST['user_mobile']);
     $user_ip = getIPAddress();
 
 

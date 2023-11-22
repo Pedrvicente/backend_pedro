@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
     $get_user = "SELECT * FROM `user_table` WHERE username = '$username'";
     $result = mysqli_query($connect, $get_user);
     $row_fetch = mysqli_fetch_assoc($result);
-    $user_id = $row_fetch['user_id'];
+    $user_id = mysqli_real_escape_string($connect,$row_fetch['user_id']);
 
     ?>
     <h3 class="text-center">As Minhas Encomendas</h3>
@@ -33,12 +33,12 @@
         $result_orders = mysqli_query($connect, $get_order);
         $number = 1;
         while($row_data=mysqli_fetch_assoc($result_orders)){
-            $order_id = $row_data['order_id'];
-            $amount = $row_data['amount'];
-            $total_products = $row_data['total_products'];
-            $invoice_number = $row_data['invoice_number']; 
-            $order_date = $row_data['order_date']; 
-            $order_status = $row_data['order_status'];
+            $order_id = mysqli_real_escape_string($connect,$row_data['order_id']);
+            $amount = mysqli_real_escape_string($connect,$row_data['amount']);
+            $total_products = mysqli_real_escape_string($connect,$row_data['total_products']);
+            $invoice_number = mysqli_real_escape_string($connect,$row_data['invoice_number']); 
+            $order_date = mysqli_real_escape_string($connect,$row_data['order_date']); 
+            $order_status = mysqli_real_escape_string($connect,$row_data['order_status']);
             if($order_status=='pending'){
                 $order_status = 'Incompleto'; 
             }else{

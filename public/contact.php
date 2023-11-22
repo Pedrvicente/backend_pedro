@@ -8,10 +8,10 @@ $message_sent = false;
 if(isset($_POST['submit'])){
 
     if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $subject = $_POST['subject'];
-        $message = $_POST['message'];
+        $name = mysqli_real_escape_string($connect,$_POST['name']);
+        $email = mysqli_real_escape_string($connect,$_POST['email']);
+        $subject = mysqli_real_escape_string($connect,$_POST['subject']);
+        $message = mysqli_real_escape_string($connect,$_POST['message']);
 
         $to = "pedro11gil@outlook.com";
         $body = "";
@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
         $body .="Message: ".$message. "\r\n";
 
 
-        //mail($to,$message,$body);
+        mail($to,$message,$body);
 
         $message_sent = true;
     }else{
@@ -64,13 +64,13 @@ if($message_sent){
           <a class="nav-link active" aria-current="page" href="../public/index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="products.php">Products</a>
+          <a class="nav-link" href="products.php">Produtos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../users_area/user_registration.php">Register</a>
+          <a class="nav-link" href="../users_area/user_registration.php">Registar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="contact.php">Contactos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">

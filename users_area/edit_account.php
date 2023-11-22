@@ -7,23 +7,23 @@
         $select_query = "SELECT * FROM `user_table` WHERE username = '$user_session'";
         $result_query = mysqli_query($connect, $select_query);
         $row_fetch = mysqli_fetch_assoc($result_query);
-        $user_id = $row_fetch['user_id'];
-        $username = $row_fetch['username'];
-        $user_password = $row_fetch['user_password'];
+        $user_id = mysqli_real_escape_string($connect,$row_fetch['user_id']);
+        $username = mysqli_real_escape_string($connect,$row_fetch['username']);
+        $user_password = mysqli_real_escape_string($connect,$row_fetch['user_password']);
         $hide_password = password_hash($user_password, PASSWORD_DEFAULT);
-        $user_email = $row_fetch['user_email'];
-        $user_adress = $row_fetch['user_adress'];
-        $user_mobile = $row_fetch['user_mobile'];
+        $user_email = mysqli_real_escape_string($connect,$row_fetch['user_email']);
+        $user_adress = mysqli_real_escape_string($connect,$row_fetch['user_adress']);
+        $user_mobile = mysqli_real_escape_string($connect,$row_fetch['user_mobile']);
 
     }
         if(isset($_POST['user_update'])){
             $update_id = $user_id;
-            $username = $_POST['username'];
-            $user_password = $_POST['user_password'];
+            $username = mysqli_real_escape_string($connect,$_POST['username']);
+            $user_password = mysqli_real_escape_string($connect,$_POST['user_password']);
             $hide_password = password_hash($user_password, PASSWORD_DEFAULT);
-            $user_email = $_POST['user_email'];
-            $user_adress = $_POST['user_adress'];
-            $user_mobile = $_POST['user_mobile'];
+            $user_email = mysqli_real_escape_string($connect,$_POST['user_email']);
+            $user_adress = mysqli_real_escape_string($connect,$_POST['user_adress']);
+            $user_mobile = mysqli_real_escape_string($connect,$_POST['user_mobile']);
 
 
             $update_query = "UPDATE `user_table` SET username='$username', user_password='$hide_password',user_email='$user_email',user_adress='$user_adress',user_mobile='$user_mobile' WHERE user_id=$update_id";
@@ -42,7 +42,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

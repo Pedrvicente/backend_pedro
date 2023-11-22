@@ -1,7 +1,6 @@
 <?php 
 
 include('../includes/db.php');
-// include('../functions/common_function.php');
 ?>
 
 
@@ -28,6 +27,9 @@ include('../includes/db.php');
                     <a href="admin_profile.php?edit_admin_account">Editar Conta</a>
                 </li>
                 <li class="nav-item">
+                    <a href="admin_profile.php?edit_admin_password">Editar Password</a>
+                </li>
+                <li class="nav-item">
                     <a href="admin_profile.php?delete_admin_account">Apagar Conta</a>
                 </li>
                 <li class="nav-item">
@@ -39,6 +41,9 @@ include('../includes/db.php');
             <?php 
             if(isset($_GET['edit_admin_account'])){
                 include('edit_admin_account.php');
+            }
+            if(isset($_GET['edit_admin_password'])){
+                include('edit_admin_password.php');
             }
 
             if(isset($_GET['delete_admin_account'])){

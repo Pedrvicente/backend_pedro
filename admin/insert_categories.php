@@ -3,7 +3,7 @@
 include('../includes/db.php');
 
 if(isset($_POST['insert_cat'])){
-    $category_title = $_POST['cat_title'];
+    $category_title = mysqli_real_escape_string($connect,$_POST['cat_title']);
 
     /* select data from database */
     $select_query = "Select * from `categories` where category_title='$category_title' ";

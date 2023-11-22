@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,13 +26,13 @@
             $result = mysqli_query($connect, $select_orders);
             $number = 0;
             while($row=mysqli_fetch_assoc($result)){
-                $order_id = $row['order_id'];
-                $user_id = $row['user_id'];
-                $amount = $row['amount'];
-                $invoice_number = $row['invoice_number'];
-                $total_products = $row['total_products'];
-                $order_status = $row['order_status'];
-                $date = $row['order_date'];
+                $order_id = mysqli_real_escape_string($connect,$row['order_id']);
+                $user_id = mysqli_real_escape_string($connect,$row['user_id']);
+                $amount = mysqli_real_escape_string($connect,$row['amount']);
+                $invoice_number = mysqli_real_escape_string($connect,$row['invoice_number']);
+                $total_products = mysqli_real_escape_string($connect,$row['total_products']);
+                $order_status = mysqli_real_escape_string($connect,$row['order_status']);
+                $date = mysqli_real_escape_string($connect,$row['order_date']);
                 $number++;
                 ?>
                 <tr>

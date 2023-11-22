@@ -10,7 +10,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,8 +54,8 @@
 
 
     if(isset($_POST['user_login'])){
-        $username = $_POST['username']; 
-        $user_password = $_POST['user_password']; 
+        $username = mysqli_real_escape_string($connect,$_POST['username']); 
+        $user_password = mysqli_real_escape_string($connect,$_POST['user_password']); 
 
         $select_query = "SELECT * FROM `user_table` WHERE username = '$username'";
         $result = mysqli_query($connect, $select_query);

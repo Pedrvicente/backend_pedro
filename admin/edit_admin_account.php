@@ -7,18 +7,18 @@
         $select_query = "SELECT * FROM `admin_table` WHERE admin_name = '$admin_session'";
         $result_query = mysqli_query($connect, $select_query);
         $row_fetch = mysqli_fetch_assoc($result_query);
-        $admin_id = $row_fetch['admin_id'];
-        $admin_name = $row_fetch['admin_name'];
-        $admin_password = $row_fetch['admin_password'];
-        $admin_email = $row_fetch['admin_email'];
+        $admin_id = mysqli_real_escape_string($connect,$row_fetch['admin_id']);
+        $admin_name = mysqli_real_escape_string($connect,$row_fetch['admin_name']);
+        $admin_password = mysqli_real_escape_string($connect,$row_fetch['admin_password']);
+        $admin_email = mysqli_real_escape_string($connect,$row_fetch['admin_email']);
 
     }
         if(isset($_POST['admin_update'])){
             $update_id = $admin_id;
-            $admin_name = $_POST['admin_name'];
-            $user_password = $_POST['admin_password'];
+            $admin_name = mysqli_real_escape_string($connect,$_POST['admin_name']);
+            $user_password = mysqli_real_escape_string($connect,$_POST['admin_password']);
             $hide_password = password_hash($user_password, PASSWORD_DEFAULT);
-            $admin_email = $_POST['admin_email'];
+            $admin_email = mysqli_real_escape_string($connect,$_POST['admin_email']);
 
 
             $update_query = "UPDATE `admin_table` SET admin_name='$admin_name' WHERE admin_id=$update_id";
@@ -37,7 +37,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,7 +1,7 @@
 <?php
 
     include('../includes/db.php');
-    include('../functions/common_function.php');
+    
 
 ?>
 
@@ -9,7 +9,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,11 +51,11 @@
     <?php
 
 if(isset($_POST['admin_register'])){
-    $admin_name = $_POST['admin_name'];
-    $admin_email = $_POST['admin_email'];
-    $admin_password = $_POST['admin_password'];
+    $admin_name = mysqli_real_escape_string($connect,$_POST['admin_name']);
+    $admin_email = mysqli_real_escape_string($connect,$_POST['admin_email']);
+    $admin_password = mysqli_real_escape_string($connect,$_POST['admin_password']);
     $hide_password = password_hash($admin_password, PASSWORD_DEFAULT);
-    $confirm_password = $_POST['confirm_password'];
+    $confirm_password = mysqli_real_escape_string($connect,$_POST['confirm_password']);
 
 
     $select_query = "SELECT * FROM `admin_table` WHERE admin_name='$admin_name' OR admin_email='$admin_email'";
